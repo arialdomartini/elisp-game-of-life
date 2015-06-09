@@ -18,7 +18,7 @@
 (neighbors '(10 20))
 
 
-(defun count-neighbors (cell generation)
+(defun count-alive-neighbors (cell generation)
   (require 'cl-lib)
   (setq neig (neighbors cell))
 
@@ -28,4 +28,4 @@
   )
 
 
-(count-neighbors '(10 11) '( (10 10) (11 10) (12 10)))
+(count-alive-neighbors '(10 11) '( (10 10) (11 10) (12 10)))
