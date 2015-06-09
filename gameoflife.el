@@ -2,8 +2,8 @@
   (if (member cell generation) t nil)
   )
 
-(contains '100 '(2 3 4))
-(contains '2 '(2 3 4))
+(eq (contains '100 '(2 3 4)) 'nil)
+(eq (contains '2 '(2 3 4)) 't)
 
 
 (defun neighbors (cell)
@@ -15,7 +15,10 @@
     )
   )
 
-(neighbors '(10 20))
+(equal
+ (neighbors '(10 20))
+ '( (9 19) (10 19) (11 19) (9 20) (11 20) (9 21) (10 21) (11 21))
+ )
 
 
 (defun count-alive-neighbors (cell generation)
@@ -28,12 +31,13 @@
   )
 
 
-(count-alive-neighbors '(10 11) '( (10 10) (11 10) (12 10)))
+(eq (count-alive-neighbors '(10 11) '( (10 10) (11 10) (12 10)))
+    2)
 
 (defun should-die (cell generation)
   (not (equal (count-alive-neighbors cell generation) 2))
   )
 
 (eq (should-die '(5 5) '()) 't)                        ; it dies for loneliness
-(eq (should-die '(5 5) '( (4 4) (5 4))) nil)           ; it doesn't die
+(eq (should-die '(5 5) '( (4 4) (5 4))) nil)           ; it doesn't die if surrounded by 2 cells
 (eq(should-die '(5 5) '( (4 4) (5 4) (6 4))) 't)       ; it dies for suffocation
