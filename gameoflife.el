@@ -41,3 +41,11 @@
 (eq (should-die '(5 5) '()) 't)                        ; it dies for loneliness
 (eq (should-die '(5 5) '( (4 4) (5 4))) nil)           ; it doesn't die if surrounded by 2 cells
 (eq(should-die '(5 5) '( (4 4) (5 4) (6 4))) 't)       ; it dies for suffocation
+
+
+(defun should-get-to-life (cell generation)
+  (equal (count-alive-neighbors cell generation) 2)
+  )
+
+(eq (should-get-to-life '(5 5) '()) nil)
+(eq (should-get-to-life '(5 5) '( (5 4) (6 4))) t)
